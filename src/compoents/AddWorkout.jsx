@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddWorkout = () => {
   const [userName, setUserName] = useState('');
   const [workoutType, setWorkoutType] = useState('');
   const [workoutMinutes, setWorkoutMinutes] = useState('');
   const [userData, setUserData] = useState([]);
-
+ const navigator=useNavigate();
   useEffect(() => {
     // Load user data from local storage when the component mounts
     const storedUserData = localStorage.getItem('userData');
@@ -15,6 +16,8 @@ const AddWorkout = () => {
   }, []);
 
   const handleAddWorkout = () => {
+
+
     const newWorkout = { type: workoutType, minutes: workoutMinutes };
     let updatedUserData;
 
@@ -32,6 +35,8 @@ const AddWorkout = () => {
         workouts: [newWorkout]
       };
       updatedUserData = [...userData, newUser];
+
+
     }
 
     setUserData(updatedUserData);
@@ -40,6 +45,8 @@ const AddWorkout = () => {
     // Clear workout type and minutes for new entry
     setWorkoutType('');
     setWorkoutMinutes('');
+
+    navigator('/')
   };
 
   return (

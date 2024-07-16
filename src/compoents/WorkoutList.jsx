@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form, Pagination, Button, Row, Col } from 'react-bootstrap';
 import WorkoutProgress from './WorkoutProgress';
+import { useNavigate } from 'react-router-dom';
+
 
 const WorkoutList = () => {
   const [data, setData] = useState([]);
@@ -9,7 +11,8 @@ const WorkoutList = () => {
   const [workoutFilter, setWorkoutFilter] = useState('');
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-
+  
+  const navigator=useNavigate();
   useEffect(() => {
     const fetchData = JSON.parse(localStorage.getItem('userData')) || [];
     setData(fetchData);
@@ -75,8 +78,14 @@ const WorkoutList = () => {
     ));
   };
 
+ function addnew(){
+  navigator('/add-workout')
+ }
+
   return (
     <div className="container mt-5">
+
+      <button className="btn btn-primary" onClick={addnew}> Add Workout</button>
         <h1 className="text-center " > List of  Workout Members </h1>
         <br/>
       <Row className="mb-3 justify-content-center">
